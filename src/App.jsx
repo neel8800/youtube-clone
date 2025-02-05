@@ -3,6 +3,26 @@ import "./App.css";
 import Body from "./components/Body";
 import Header from "./components/Header";
 import store from "./utils/store/store";
+import MainContainer from "./components/MainContainer";
+import WatchPage from "./components/WatchPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <Body />,
+    children: [
+      {
+        path: "/",
+        element: <MainContainer />,
+      },
+      {
+        path: "watch",
+        element: <WatchPage />,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
@@ -12,7 +32,7 @@ function App() {
           <Header />
         </div>
         <div className="p-2">
-          <Body />
+          <RouterProvider router={appRouter} />
         </div>
       </div>
     </Provider>
